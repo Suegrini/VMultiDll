@@ -101,5 +101,40 @@ namespace VMultiDllWrapper
             }
         }
 
+        public virtual bool updateMouse(MouseReport report)
+        {
+            if (connected)
+            {
+                byte wheelPosition = report.WheelPosition;
+                report.WheelPosition = 0;
+
+                return vmulti_update_mouse(vmulti, (byte)report.Buttons, report.MouseX, report.MouseY, wheelPosition);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public virtual bool updateRelativeMouse(MouseReport report)
+        {
+            if (connected)
+            {
+                byte wheelPosition = report.WheelPosition;
+                report.WheelPosition = 0;
+
+                byte relativeX = report.RelativeMouseX;
+                byte relativeY = report.RelativeMouseY;
+
+                report.RelativeMouseX = 0;
+                report.RelativeMouseY = 0;
+
+                return vmulti_update_relative_mouse(vmulti, (byte)report.Buttons, relativeX, relativeY, wheelPosition);
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
