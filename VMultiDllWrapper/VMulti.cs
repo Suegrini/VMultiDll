@@ -10,9 +10,6 @@ namespace VMultiDllWrapper
     public class VMulti
     {
         [DllImport("VMultiDll.dll")]
-        public static extern void HelloWorld();
-
-        [DllImport("VMultiDll.dll")]
         public static extern IntPtr vmulti_alloc();
 
         [DllImport("VMultiDll.dll")]
@@ -32,6 +29,12 @@ namespace VMultiDllWrapper
 
         [DllImport("VMultiDll.dll")]
         public static extern bool vmulti_update_keyboard(IntPtr vmulti, byte shiftKeyFlags, byte[] keyCodes);
+
+        [DllImport("VMultiDll.dll")]
+        internal static extern bool vmulti_update_mouse(IntPtr vmulti, byte buttons, ushort x, ushort y, byte wheelPosition);
+
+        [DllImport("VMultiDll.dll")]
+        internal static extern bool vmulti_update_relative_mouse(IntPtr vmulti, byte buttons, byte x, byte y, byte wheelPosition);
 
         private IntPtr vmulti;
         private bool connected;
