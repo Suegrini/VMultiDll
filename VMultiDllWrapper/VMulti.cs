@@ -49,9 +49,10 @@ namespace VMultiDllWrapper
             return this.connected;
         }
 
-        public virtual bool connect()
+        public virtual bool connect(int id = 1)
         {
-            return this.connected = vmulti_connect(vmulti, 1);
+            connected = vmulti_connect(vmulti, id);
+            return connected;
         }
 
         public virtual void disconnect()
@@ -59,6 +60,7 @@ namespace VMultiDllWrapper
             if (connected)
             {
                 vmulti_disconnect(vmulti);
+                connected = false;
             }
         }
 
